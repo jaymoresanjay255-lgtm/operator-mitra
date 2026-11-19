@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+<meta name="theme-color" content="#123b65">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operator Mitra</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #222;
+}
+
+header {
+  background: #123b65;
+  color: white;
+  text-align: center;
+  padding: 22px 10px;
+}
+
+header h1 { margin: 0; }
+
+.container {
+  padding: 18px;
+  max-width: 500px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0001;
+}
+
+h2 { color: #123b65; }
+
+button {
+  width: 100%;
+  padding: 13px;
+  margin: 7px 0;
+  border: none;
+  border-radius: 7px;
+  background: #1266a5;
+  color: white;
+  font-size: 16px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin: 7px 0 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.hidden { display: none; }
+
+.back { background: #555; }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+</style>
+<meta name="theme-color" content="#123b65">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+<header>
+  <h1>OPERATOR MITRA</h1>
+  <p>Operator आणि Company यांना जोडणारे व्यासपीठ</p>
+</header>
+
+<div style="width:100%; margin:0 auto 18px; text-align:center;">
+  <img
+    src="operator_mitra_home_photo.jpg"
+    alt="Operator Mitra"
+    style="width:100%; height:300px; object-fit:cover; object-position:center; border-radius:12px;"
+  >
+</div>
+
+<main class="container">
+
+<section id="home">
+
+  <div class="card">
+    <h2>Welcome to Operator Mitra</h2>
+    <p>Free Registration करा आणि नवीन Jobs शोधा.</p>
+  </div>
+
+  <div class="card">
+    <h2>Operator</h2>
+    <p>तुमची नोंदणी मोफत करा.</p>
+
+    <button onclick="showPage('operator-registration')">
+      Operator Registration
+    </button>
+
+    <button onclick="showPage('operator-login')">
+      Operator Login
+    </button>
+  </div>
+
+  <div class="card">
+    <h2>Company / Contractor</h2>
+    <p>Operator शोधा आणि Jobs पोस्ट करा.</p>
+
+  
+    <button onclick="showPage('company-registration')">
+  Company Registration
+</button>
+
+<button onclick="showPage('company-login')">
+  Company Login
+</button>
+  </div>
+
+  <div class="card">
+    <h2>Admin</h2>
+    <button onclick="showPage('admin-login')">
+  Admin Login
+    </button>
+      Admin Panel
+    </>
+  </div>
+
+</section></section>
+
+<section id="operator-registration" class="hidden">
+
+  <div class="card">
+    <h2>Operator Registration</h2>
+    
+
+    <form onsubmit="registerOperator(event)">
+
+      <label>Full Name</label>
+      <input type="text" id="full_name"
+      placeholder="तुमचे पूर्ण नाव" required>
+
+      <label>Email</label>
+      <input type="email" id="email"
+      placeholder="Email Address" required>
+
+      <label>Mobile Number</label>
+      <input type="tel" id="mobile"
+      placeholder="Mobile Number" required>
+
+      <label>City</label>
+      <input type="text" id="city"
+      placeholder="तुमचे शहर" required>
+
+      <label>State</label>
+      <input type="text" id="state"
+      placeholder="तुमचे राज्य" required>
+
+      <label>Machine</label>
+      <select id="machine" required>
+        <option value="">Machine निवडा</option>
+        <option>Concrete Pump</option>
+        <option>Boom Placer</option>
+        <option>Transit Mixer</option>
+        <option>Crane</option>
+        <option>JCB</option>
+        <option>Other</option>
+      </select>
+
+      <label>Machine Experience (Years)</label>
+      <input type="number" id="experience"
+      min="0" placeholder="उदा. 5 वर्षे" required>
+
+      <label>Password</label>
+      <input type="password" id="password"
+      placeholder="Create Password"
+      minlength="6" required>
+
+      <button type="submit">
+        Submit Registration
+      </button>
+
+    </form>
+
+    <button type="button" class="back"
+    onclick="showPage('home')">
+      Back to Home
+    </button>
+
+  </div><button type="button" onclick="openAdminPanel()">
+  Admin Panel
+  </button>
+</section>
+
+</main>
+
+<footer>
+  © 2026 Operator Mitra
+</footer>
+
+<script>
+function showPage(pageId) {
+  const pages = [
+    "home",
+    "operator-registration",
+    "operator-login",
+    "company-registration",
+"company-login",
+    "company-dashboard",
+    "premium-membership",
+    "adminPage",
+    "admin-login"
+  ];
+
+  pages.forEach(id => {
+    const page = document.getElementById(id);
+    if (page) {
+      page.classList.add("hidden");
+      page.style.display = "none";
+    }
+  });
+
+  const selected = document.getElementById(pageId);
+
+  if (selected) {
+    selected.classList.remove("hidden");
+    selected.style.display = "block";
+  } else {
+    alert("Page not found: " + pageId);
+  }
+}
+
+
+async function registerOperator(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("full_name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const mobile = document.getElementById("mobile").value.trim();
+  const city = document.getElementById("city").value.trim();
+  const state = document.getElementById("state").value.trim();
+  const machine = document.getElementById("machine").value;
+  const experience = document.getElementById("experience").value;
+  const password = document.getElementById("password").value;
+
+  if (!supabaseClient) {
+    alert("Supabase Connection उपलब्ध नाही.");
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+      data: {
+        full_name: name,
+        role: "operator",
+        mobile: mobile,
+        city: city,
+        state: state,
+        machine: machine,
+        experience_years: Number(experience)
+      }
+    }
+  });
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert("Registration request submitted! Admin approval pending.");
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://uxeppnsnogqkgwzkbmtu.supabase.co";
+const SUPABASE_KEY = "sb_publishable_hkHuL1FUD3PSl4SOoPq3HA_f-ath6RU";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+</script>
+<section id="operator-login" class="hidden">
+  <div class="card">
+    <h2>Operator Login</h2>
+
+    <label>Email</label>
+    <input type="email" id="operatorLoginEmail" placeholder="Registered Email">
+
+    <label>Password</label>
+    <input type="password" id="operatorLoginPassword" placeholder="Password">
+
+    <button onclick="operatorLogin()">Login</button>
+    <button onclick="showPage('home')">Back</button>
+  </div>
+</section>
+
+<section id="operator-dashboard" class="hidden">
+  <div class="card">
+    <h2>Welcome to Operator Mitra</h2>
+
+    <h3>My Operator Profile</h3>
+
+    <p><b>Name:</b> <span id="profileName">Loading...</span></p>
+    <p><b>Machine:</b> <span id="profileMachine">Loading...</span></p>
+    <p><b>Experience:</b> <span id="profileExperience">Loading...</span></p>
+    <p><b>City:</b> <span id="profileCity">Loading...</span></p>
+    <p><b>State:</b> <span id="profileState">Loading...</span></p>
+    <p><b>Approval Status:</b> <span id="profileStatus">Loading...</span></p>
+
+    <p><b>Mobile Number:</b> Private 🔒</p>
+
+    <button onclick="supabaseClient.auth.signOut().then(() => showPage('home'))">
+      Logout
+    </button>
+  </div>
+</section>
+
+  <section id="admin-login" class="hidden">
+  <div class="card">
+    <h2>Admin Login</h2>
+
+    <input type="email" id="adminEmail" placeholder="Admin Email">
+
+    <input type="password" id="adminPassword" placeholder="Password">
+
+    <button onclick="adminLogin()">Login</button>
+
+    <button onclick="showPage('home')">Back</button>
+  </div>
+</section><section id="adminPage" style="display:none; padding:20px;">
+  <h2>Operator Mitra - Admin Panel</h2>
+
+  <h3>Pending Operators</h3>
+
+<div id="pendingOperators">
+  Loading...
+</div>
+
+<h3>Premium Subscriptions</h3>
+
+<div id="adminSubscriptions">
+  Loading...
+</div>
+  <h3>Pending Companies</h3>
+
+  <div id="pendingCompanies">
+    Loading...
+  </div>
+  <button onclick="showPage('home')">
+    Back to Home
+  </button>
+</section><script>
+async function loadAdminPanel() {
+  const box = document.getElementById("pendingOperators");
+
+  box.innerHTML = "Loading...";
+  const { data: subscriptions, error: subError } =
+  await supabaseClient.rpc("admin_list_subscriptions");
+
+const subBox = document.getElementById("adminSubscriptions");
+
+if (subError) {
+  subBox.innerHTML = "Subscription Error: " + subError.message;
+} else if (!subscriptions || subscriptions.length === 0) {
+  subBox.innerHTML = "<h3>No Premium Subscriptions Yet</h3>";
+} else {
+  subBox.innerHTML = subscriptions.map(sub => `
+    <div style="border:1px solid #ccc;padding:12px;margin:10px 0;">
+      <h3>${sub.plan_name}</h3>
+      <p>Company ID: ${sub.company_id}</p>
+      <p>Payment Status: ${sub.payment_status}</p>
+      <p>End Date: ${sub.end_date || "Not Set"}</p>
+    </div>
+  `).join("");
+}
+
+  try {
+    const { data, error } =
+      await supabaseClient.rpc("admin_list_pending_operators");
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      box.innerHTML = "No Pending Operators";
+      return;
+    }
+
+    box.innerHTML = data.map(op => `
+      <div style="border:1px solid #ccc;padding:12px;margin:10px 0;border-radius:8px;">
+        <h3>${op.full_name || ""}</h3>
+        <p>City: ${op.city || ""}</p>
+        <p>State: ${op.state || ""}</p>
+        <p>Machine: ${op.machine_category || ""}</p>
+        <p>Experience: ${op.experience_years || 0} years</p>
+        <p>Mobile: ${op.mobile_number || ""}</p>
+        <p>Status: ${op.approval_status}</p>
+
+        <button onclick="updateOperator('${op.operator_id}','approved')">
+          Approve
+        </button>
+
+        <button onclick="updateOperator('${op.operator_id}','rejected')">
+          Reject
+        </button>
+      </div>
+    `).join("");
+
+  } catch (error) {
+    box.innerHTML = "Error: " + error.message;
+  }
+}
+
+async function updateOperator(id, status) {
+  const { error } = await supabaseClient.rpc(
+    "admin_update_operator",
+    {
+      target_operator_id: id,
+      new_status: status
+    }
+  );
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert("Operator status updated!");
+  loadAdminPanel();
+}async function loadPendingCompanies() {
+  const box = document.getElementById("pendingCompanies");
+
+  box.innerHTML = "Loading...";
+
+  const { data, error } = await supabaseClient.rpc(
+    "admin_list_pending_companies"
+  );
+
+  if (error) {
+    box.innerHTML = "Error: " + error.message;
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    box.innerHTML = "No Pending Companies";
+    return;
+  }
+
+  box.innerHTML = data.map(company => `
+    <div style="border:1px solid #ccc;padding:12px;margin:10px 0;border-radius:8px;">
+      <h3>${company.company_name}</h3>
+      <p>Status: ${company.verification_status}</p>
+
+      <button onclick="updateCompany('${company.id}','approved')">
+        Approve
+      </button>
+
+      <button onclick="updateCompany('${company.id}','rejected')">
+        Reject
+      </button>
+    </div>
+  `).join("");
+}async function updateCompany(id, status) {
+  const { error } = await supabaseClient.rpc(
+    "admin_update_company",
+    {
+      target_company_id: id,
+      new_status: status
+    }
+  );
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert("Company status updated!");
+  loadPendingCompanies();
+}
+async function openAdminPanel() {
+  const { data: { user }, error } =
+    await supabaseClient.auth.getUser();
+
+ alert("Admin function started"); if (error || !user) {
+    alert("Please login first");
+    return;
+  }
+
+  showPage("adminPage");
+  loadAdminPanel();
+  }
+   async function operatorLogin() {
+  const email = document.getElementById("operatorLoginEmail").value.trim();
+  const password = document.getElementById("operatorLoginPassword").value;
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    alert("Login Failed: " + error.message);
+    return;
+  }
+
+  const userId = data.user.id;
+
+  const { data: operator, error: opError } = await supabaseClient
+    .from("operators")
+    .select("machine_category, experience_years, approval_status, is_active")
+    .eq("id", userId)
+    .maybeSingle();
+
+  if (opError || !operator) {
+    alert("Operator profile not found: " + (opError?.message || ""));
+    await supabaseClient.auth.signOut();
+    return;
+  }
+
+  if (operator.approval_status !== "approved" || !operator.is_active) {
+    alert("Admin approval pending.");
+    await supabaseClient.auth.signOut();
+    return;
+  }
+
+  const { data: profile, error: profileError } = await supabaseClient
+    .from("profiles")
+    .select("full_name, city, state")
+    .eq("id", userId)
+    .maybeSingle();
+
+  if (profileError || !profile) {
+    alert("Profile details not found: " + (profileError?.message || ""));
+    await supabaseClient.auth.signOut();
+    return;
+  }
+
+  document.getElementById("profileName").textContent = profile.full_name || "";
+  document.getElementById("profileMachine").textContent = operator.machine_category || "";
+  document.getElementById("profileExperience").textContent = (operator.experience_years ?? 0) + " Years";
+  document.getElementById("profileCity").textContent = profile.city || "";
+  document.getElementById("profileState").textContent = profile.state || "";
+  document.getElementById("profileStatus").textContent = operator.approval_status;
+
+  showPage("operator-dashboard");
+   }                                        
+  async function adminLogin() {
+  const email = document.getElementById("adminEmail").value;
+  const password = document.getElementById("adminPassword").value;
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    alert("Login Failed: " + error.message);
+    return;
+  }
+
+  const { error: adminError } = await supabaseClient.rpc(
+    "admin_list_pending_operators"
+  );
+
+  if (adminError) {
+    alert("Admin access denied: " + adminError.message);
+    return;
+  }
+
+  showPage("adminPage");
+  loadAdminPanel();
+    loadPendingCompanies();
+  }
+
+async function companyRegister() {
+  const companyName = document.getElementById("companyName").value.trim();
+  const email = document.getElementById("companyEmail").value.trim();
+  const password = document.getElementById("companyPassword").value;
+
+  if (!companyName || !email || !password) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  if (password.length < 6) {
+    alert("Password must be at least 6 characters");
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+  emailRedirectTo: "http://localhost:3000",
+  data: {
+    role: "company",
+    company_name: companyName
+  }
+    }
+  });
+
+  if (error) {
+    alert("Registration Failed: " + error.message);
+    return;
+  }
+
+  alert("Registration submitted! Please check your email.");
+}
+
+async function companyLogin() 
+{
+  const email = document.getElementById("companyLoginEmail").value.trim();
+  const password = document.getElementById("companyLoginPassword").value;
+
+  if (!email || !password) {
+    alert("Please enter email and password");
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    alert("Company Login Failed: " + error.message);
+    return;
+  }
+
+  const { data: company, error: companyError } = await supabaseClient
+    .from("companies")
+    .select("company_name, verification_status")
+    .eq("user_id", data.user.id)
+    .maybeSingle();
+
+  if (companyError || !company) {
+    alert("Company profile not found: " + (companyError?.message || ""));
+    await supabaseClient.auth.signOut();
+    return;
+  }
+
+  if (company.verification_status !== "approved") {
+    alert("Company verification pending. Please wait for Admin approval.");
+    await supabaseClient.auth.signOut();
+    return;
+  }
+
+  alert("Welcome " + company.company_name);
+showPage("company-dashboard");
+}
+async function postNewJob() {
+  const jobTitle = document.getElementById("jobTitle").value.trim();
+  const machine = document.getElementById("jobMachine").value.trim();
+  const location = document.getElementById("jobLocation").value.trim();
+  const salaryValue = document.getElementById("jobSalary").value.trim();
+  const description = document.getElementById("jobDescription").value.trim();
+
+  if (!jobTitle || !machine || !location) {
+    alert("Please fill Job Title, Machine and Location");
+    return;
+  }
+
+  const { data: { user }, error: userError } =
+    await supabaseClient.auth.getUser();
+
+  if (userError || !user) {
+    alert("Please login first");
+    return;
+  }
+
+  const salary = salaryValue === "" ? null : Number(salaryValue);
+
+  if (salary !== null && !Number.isFinite(salary)) {
+    alert("Please enter a valid salary");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("jobs")
+    .insert({
+      company_id: user.id,
+      job_title: jobTitle,
+      machine_category: machine,
+      location: location,
+      salary: salary,
+      description: description,
+      status: "pending"
+    });
+
+  if (error) {
+    alert("Job Posting Failed: " + error.message);
+    return;
+  }
+
+  alert("Job Posted Successfully! Waiting for Admin Approval.");
+
+  document.getElementById("jobTitle").value = "";
+  document.getElementById("jobMachine").value = "";
+  document.getElementById("jobLocation").value = "";
+  document.getElementById("jobSalary").value = "";
+  document.getElementById("jobDescription").value = "";
+
+  showPage("company-dashboard");
+  }
+  
+
+async function searchOperators() {
+  const machine = document.getElementById("searchMachine").value.trim();
+  const box = document.getElementById("operatorResults");
+
+  if (!machine) {
+    alert("Please enter Machine Category");
+    return;
+  }
+
+  box.textContent = "Searching...";
+
+  const { data: operators, error } = await supabaseClient
+    .from("operators")
+    .select("id, machine_category, experience_years, expected_salary")
+    .eq("approval_status", "approved")
+    .eq("is_active", true)
+    .ilike("machine_category", "%" + machine + "%");
+
+  if (error) {
+    box.textContent = "Error: " + error.message;
+    return;
+  }
+
+  if (!operators || operators.length === 0) {
+    box.textContent = "No Approved Operators Found";
+    return;
+  }
+
+  const ids = operators.map(op => op.id);
+
+  const { data: profiles, error: profileError } = await supabaseClient
+    .from("profiles")
+    .select("id, full_name, city, state")
+    .in("id", ids);
+
+  if (profileError) {
+    box.textContent = "Profile Error: " + profileError.message;
+    return;
+  }
+
+  box.innerHTML = "";
+
+  for (const op of operators) {
+    const profile = profiles.find(p => p.id === op.id);
+
+    const card = document.createElement("div");
+    card.style.cssText =
+      "border:1px solid #ccc;padding:12px;margin:10px 0;border-radius:8px;";
+
+    const name = document.createElement("h3");
+    name.textContent = profile?.full_name?.trim() || "Operator";
+
+    const details = document.createElement("p");
+    details.textContent =
+      "Machine: " + op.machine_category +
+      " | Experience: " + op.experience_years + " years" +
+      " | City: " + (profile?.city || "Not provided") +
+      " | State: " + (profile?.state || "Not provided");
+
+    card.append(name, details);
+
+    const contact = document.createElement("p");
+
+    const { data: mobile, error: mobileError } =
+      await supabaseClient.rpc("get_operator_mobile", {
+        target_operator_id: op.id
+      });
+
+    if (mobileError) {
+      contact.textContent = "Contact: Not available";
+    } else if (mobile) {
+      contact.textContent = "Mobile: " + mobile;
+    } else {
+      contact.textContent = "Mobile: Premium Membership Required";
+    }
+
+    card.appendChild(contact);
+    box.appendChild(card);
+  }
+}
+
+
+</script>
+<section id="company-registration" class="hidden">
+  <div class="card">
+    <h2>Company Registration</h2>
+
+    <label>Company Name</label>
+    <input type="text" id="companyName" placeholder="Enter Company Name">
+
+    <label>Email</label>
+    <input type="email" id="companyEmail" placeholder="Enter Email">
+
+    <label>Password</label>
+    <input type="password" id="companyPassword" placeholder="Create Password">
+
+    <button type="button" onclick="companyRegister()">Register</button>
+    <button type="button" onclick="showPage('home')">Back to Home</button>
+  </div>
+</section>
+
+<section id="company-login" class="hidden">
+  <div class="card">
+    <h2>Company Login</h2>
+
+    <label>Email</label>
+    <input type="email" id="companyLoginEmail" placeholder="Enter Email">
+
+    <label>Password</label>
+    <input type="password" id="companyLoginPassword" placeholder="Enter Password">
+
+    <button type="button" onclick="companyLogin()">Login</button>
+    <button type="button" onclick="showPage('home')">Back to Home</button>
+  </div>
+</section>
+<section id="company-dashboard" class="hidden">
+  <div class="card">
+    <h2>Company Dashboard</h2>
+
+    <h3>Welcome to Operator Mitra!</h3>
+
+    <button onclick="showPage('find-operators')">
+  Find Skilled Operators
+</button>
+
+<button onclick="showPage('post-job')">
+  Post New Jobs
+</button>
+    <button onclick="showPage('premium-membership')">
+  Premium Membership
+    </button>
+    <p>Manage Your Bookings</p>
+    <p>Premium Membership</p>
+
+    <button onclick="showPage('home')">
+      Back to Home
+    </button>
+  </div>
+</section>
+<section id="post-job" class="hidden">
+  <div class="card">
+    <h2>Post New Job</h2>
+
+    <label>Job Title</label>
+    <input type="text" id="jobTitle" placeholder="Enter Job Title">
+
+    <label>Machine Category</label>
+    <input type="text" id="jobMachine" placeholder="Enter Machine">
+
+    <label>Location</label>
+    <input type="text" id="jobLocation" placeholder="Enter Location">
+
+    <label>Salary</label>
+    <input type="text" id="jobSalary" placeholder="Enter Salary">
+
+    <label>Description</label>
+    <textarea id="jobDescription" placeholder="Enter Job Details"></textarea>
+
+    <button onclick="postNewJob()">Submit Job</button>
+    <button onclick="showPage('company-dashboard')">Back</button>
+  </div>
+</section>
+<section id="find-operators" class="hidden">
+  <div class="card">
+    <h2>Find Skilled Operators</h2>
+
+    <label>Machine Category</label>
+    <input type="text" id="searchMachine" placeholder="Enter Machine Category">
+
+    <button onclick="searchOperators()">Search Operators</button>
+
+    <div id="operatorResults">Search results will appear here</div>
+
+    <button onclick="showPage('company-dashboard')">
+      Back to Dashboard
+    </button>
+  </div>
+</section>
+</body>
+  <section id="premium-membership" class="hidden">
+  <div class="card">
+    <h2>Premium Membership</h2>
+    <h2>Premium Plan</h2>
+
+<h1>₹999 / Month</h1>
+
+<p>✔ Verified Operators चे Mobile Numbers</p>
+<p>✔ Direct Contact with Operators</p>
+<p>✔ Skilled Operators Search</p>
+
+<button onclick="alert('Payment Gateway will be connected soon!')">
+  Subscribe Now - ₹999
+</button>
+<p style="color:orange;">
+  Payment Status: Pending
+</p>
+    <p>Unlock Operator Mobile Numbers</p>
+
+    <h3>Premium Benefits</h3>
+    <p>View verified operators' mobile numbers.</p>
+    <p>Contact skilled operators directly.</p>
+
+    <button onclick="showPage('company-dashboard')">
+      Back to Dashboard
+    </button>
+  </div>
+  </section>
+</html>
